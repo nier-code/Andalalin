@@ -1,11 +1,13 @@
-# Use the official Ubuntu base image
+# Use a base image that supports systemd, for example, Ubuntu
 FROM ubuntu:latest
 
-# Install shell-in-a-box
+# Install necessary packages
 RUN apt-get update && apt-get install -y shellinabox
 
-# Expose the default shell-in-a-box port
+RUN echo 'root:root' | chpasswd
+
+# Expose the web-based terminal port
 EXPOSE 4200
 
-# Start shell-in-a-box service
-CMD ["shellinaboxd", "-t", "--no-beep", "--disable-ssl", "--localhost-only", "--port=4200"]
+# Start shellinabox
+CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
