@@ -26,5 +26,7 @@ EXPOSE 4200
 
 COPY entrypoint.sh /
 
+RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["shellinabox"]
