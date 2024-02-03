@@ -1,15 +1,18 @@
 # Use the official Ubuntu base image
 FROM ubuntu:latest
 
-# Install necessary packages (adjust as needed)
-RUN apt-get update && \
-    apt-get install -y openssh-server
+# Install necessary packages (you can customize this as needed)
+RUN apt-get update && apt-get install -y openssh-server
 
-# Set a root password (replace "your_password" with your desired password)
+# Set up SSH (for remote access)
+RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 
-# Authorize SSH host (replace example.com with your target host)
-RUN ssh-keyscan andalalin.com > /root/.ssh/known_hosts
+# Expose SSH port
+EXPOSE 22
 
-# Start SSH server
+# Start SSH service
 CMD ["/usr/sbin/sshd", "-D"]
