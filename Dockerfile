@@ -14,7 +14,7 @@ RUN echo 'root:your_password' | chpasswd
 EXPOSE 4200
 
 # Start Shellinabox on container startup
-CMD ["shellinabox", "-t", "--no-beep", "-p", "4200", "--user=root", "--service=:LOGIN"]
+CMD ["/usr/bin/shellinaboxd", "-t", "--no-beep", "-p", "4200", "--user=root", "--service=:LOGIN"]
 
 # Remember to build the Docker image using: docker build -t ubuntu_shellinabox .
 # Run the container using: docker run -p 4200:4200 ubuntu_shellinabox
