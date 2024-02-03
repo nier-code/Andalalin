@@ -9,7 +9,7 @@ ENV SIAB_USERCSS="Colors:+/usr/share/shellinabox/color.css,Normal:-/usr/share/sh
     SIAB_GROUPID=1000 \
     SIAB_PASSWORD=root \
     SIAB_SHELL=/bin/bash \
-    SIAB_HOME=/home/guest \
+    SIAB_HOME=/home/root \
     SIAB_SUDO=false \
     SIAB_SSL=true \
     SIAB_SERVICE=/:LOGIN \
@@ -24,7 +24,7 @@ RUN yum install -y epel-release && \
 
 EXPOSE 4200
 
-ADD assets/entrypoint.sh /usr/local/sbin/
+ADD /entrypoint.sh /usr/local/sbin/
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["shellinabox"]
