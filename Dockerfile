@@ -8,7 +8,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a new user (replace 'your_user' with your desired username)
-RUN useradd -ms /bin/bash your_user
+RUN useradd -ms /bin/bash root
 
 # Set password for the new user (replace 'your_password' with your desired password)
 RUN echo 'root:root' | chpasswd
