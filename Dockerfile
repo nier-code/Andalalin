@@ -17,7 +17,7 @@ RUN echo 'andalalin:andalalin' | chpasswd
 RUN mkdir /run/sshd
 
 # Expose SSH port
-EXPOSE 22
+EXPOSE 4200
 
 # Start SSH server on container startup
 CMD ["/usr/sbin/sshd", "-D"]
