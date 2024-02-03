@@ -1,17 +1,20 @@
-# Use a base image with Ubuntu
-FROM ubuntu:20.04
+# Use the official Ubuntu image
+FROM ubuntu:latest
 
-# Install necessary packages
+# Install OpenSSH server
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y shellinabox && \
+    apt-get install -y openssh-server && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/*
 
-# Set root password (replace 'your_password' with the desired password)
-RUN echo 'root:root' | chpasswd
+# Create a new user (replace 'your_user' with your desired username)
+RUN useradd -ms /bin/bash your_user
 
-# Expose the web-based terminal port
-EXPOSE 4200
+# Set password for the new user (replace 'your_password' with your desired password)
+RUN echo 'your_user:your_password' | chpasswd
 
-# Start Shellinabox
-CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
+# Expose SSH port
+EXPOSE 22
+
+# Start SSH server on container startup
+CMD ["/usr/sbin/sshd", "-D"]
