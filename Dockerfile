@@ -6,6 +6,10 @@ RUN yum update -y && \
     yum install -y epel-release && \
     yum install -y shellinabox
 
+RUN useradd -m -s /bin/bash andalalin
+
+RUN echo 'andalalin:andalalin' | chpasswd
+
 # Expose Shellinabox port
 EXPOSE 4200
 
