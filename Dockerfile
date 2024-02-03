@@ -1,5 +1,5 @@
 # Use the official CentOS image as the base
-FROM centos:8
+FROM centos:7
 
 # Install necessary packages (customize as needed)
 RUN yum update -y && \
