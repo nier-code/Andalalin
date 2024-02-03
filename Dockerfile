@@ -14,4 +14,4 @@ RUN echo 'andalalin:andalalin' | chpasswd
 EXPOSE 4200
 
 # Define the entry point (start Shellinabox)
-CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
+CMD ["shellinaboxd", "-t", "-s", "/:LOGIN"]
