@@ -16,6 +16,9 @@ RUN echo 'andalalin:andalalin' | chpasswd
 # Create the privilege separation directory
 RUN mkdir /run/sshd
 
+# Disable SSH banner
+RUN sed -i 's/#Banner.*/Banner none/' /etc/ssh/sshd_config
+
 # Enable SSH service
 RUN systemctl enable ssh
 
