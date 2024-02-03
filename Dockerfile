@@ -8,10 +8,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a new user (replace 'your_user' with your desired username)
-RUN useradd -ms /bin/bash root
+RUN useradd -ms /bin/bash andalalin
 
 # Set password for the new user (replace 'your_password' with your desired password)
-RUN echo 'root:root' | chpasswd
+RUN echo 'andalalin:andalalin' | chpasswd
 
 # Expose SSH port
 EXPOSE 22
