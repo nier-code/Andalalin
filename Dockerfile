@@ -1,15 +1,12 @@
-# Use a base image that supports systemd, for example, Ubuntu
-FROM ubuntu:20.04
+# Use a base image with an operating system (e.g., Ubuntu)
+FROM ubuntu:latest
 
-# Install necessary packages
+# Install Shellinabox and dependencies
 RUN apt-get update && \
-apt-get install -y shellinabox && \
-apt-get install -y systemd && \
-apt-get clean && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN echo 'root:root' | chpasswd
-# Expose the web-based terminal port
+    apt-get install -y shellinabox
+
+# Expose Shellinabox port
 EXPOSE 4200
 
-# Start shellinabox
-CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN", "--no-beep", "--disable-ssl", "-b", "/shell:LOGIN"]
+# Start Shellinabox on container startup
+CMD ["shellinabox", "-t", "-s", "/:LOGIN", "--no-beep", "--disable-ssl", "-b", "/shell:LOGIN"]
