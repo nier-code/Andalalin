@@ -5,14 +5,11 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install -y openssh-server
 
-# Create an SSH key for root user (replace with your own private key)
-RUN mkdir -p /root/.ssh && \
-    chmod 0700 /root/.ssh && \
-    echo "YOUR_PRIVATE_SSH_KEY" > /root/.ssh/id_rsa && \
-    chmod 600 /root/.ssh/id_rsa
+# Set a root password (replace "your_password" with your desired password)
+RUN echo 'root:root' | chpasswd
 
 # Authorize SSH host (replace example.com with your target host)
-RUN ssh-keyscan example.com > /root/.ssh/known_hosts
+RUN ssh-keyscan andalalin.com > /root/.ssh/known_hosts
 
 # Start SSH server
 CMD ["/usr/sbin/sshd", "-D"]
