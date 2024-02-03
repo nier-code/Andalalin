@@ -9,4 +9,4 @@ RUN apt-get update && \
 EXPOSE 4200
 
 # Start Shellinabox on container startup
-CMD ["shellinabox", "-t", "-s", "/:LOGIN", "--no-beep", "--disable-ssl", "-b", "/shell:LOGIN"]
+CMD ["/usr/bin/shellinabox", "-t", "-s", "/:LOGIN", "--no-beep", "--disable-ssl", "-b", "/shell:LOGIN"]
