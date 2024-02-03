@@ -26,5 +26,5 @@ EXPOSE 4200
 
 ADD /entrypoint.sh /usr/local/sbin/
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["shellinabox"]
