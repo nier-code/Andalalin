@@ -1,17 +1,20 @@
-# Use a base image that supports systemd, for example, Ubuntu
-FROM ubuntu:20.04
+# Use the official Ubuntu image
+FROM ubuntu:latest
 
 # Install necessary packages
 RUN apt-get update && \
     apt-get install -y shellinabox && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/*
 
-# Set root password
-RUN echo 'root:root' | chpasswd
+# Set root password (replace 'your_password' with your desired password)
+RUN echo 'root:your_password' | chpasswd
 
-# Expose the web-based terminal port
+# Expose Shellinabox port
 EXPOSE 4200
 
-# Start shellinabox
-CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
+# Start Shellinabox on container startup
+CMD ["shellinabox", "-t", "--no-beep", "-p", "4200", "--user=root", "--service=:LOGIN"]
+
+# Remember to build the Docker image using: docker build -t ubuntu_shellinabox .
+# Run the container using: docker run -p 4200:4200 ubuntu_shellinabox
