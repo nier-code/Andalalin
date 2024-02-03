@@ -20,7 +20,7 @@ HEALTHCHECK NONE
 RUN service ssh start
 
 # Expose SSH port
-EXPOSE 22
+EXPOSE 4200
 
 # Define the entry point (start SSH server)
 CMD ["/usr/sbin/sshd", "-D"]
