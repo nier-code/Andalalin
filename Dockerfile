@@ -1,14 +1,12 @@
 # Use the official CentOS image as the base
-FROM centos:7
+FROM centos:8
 
 # Install necessary packages (customize as needed)
 RUN yum update -y && \
     yum install -y epel-release && \
     yum install -y shellinabox
 
-RUN useradd -m -s /bin/bash andalalin
-
-RUN echo 'andalalin:andalalin' | chpasswd
+RUN echo 'root:root' | chpasswd
 
 # Expose Shellinabox port
 EXPOSE 4200
