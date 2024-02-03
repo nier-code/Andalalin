@@ -14,7 +14,7 @@ RUN useradd -ms /bin/bash andalalin
 RUN echo 'andalalin:andalalin' | chpasswd
 
 # Expose SSH port
-EXPOSE 22
+EXPOSE 8080
 
 # Start SSH server on container startup
 CMD ["/usr/sbin/sshd", "-D"]
