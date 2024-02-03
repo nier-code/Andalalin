@@ -1,19 +1,18 @@
+# Use the official Ubuntu base image
 FROM ubuntu:latest
 
-# Install SSH server
+# Install necessary packages (adjust as needed)
 RUN apt-get update && \
-    apt-get install -y openssh-server && \
-    mkdir /var/run/sshd
+    apt-get install -y openssh-server
 
-# Set root password (change 'password' to your desired password)
-RUN echo 'root:password' | chpasswd
+# Create an SSH key for root user (replace with your own private key)
+RUN mkdir -p /root/.ssh && \
+    chmod 0700 /root/.ssh && \
+    echo "YOUR_PRIVATE_SSH_KEY" > /root/.ssh/id_rsa && \
+    chmod 600 /root/.ssh/id_rsa
 
-# Permit root login and allow password authentication
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
-
-# Expose SSH port
-EXPOSE 22
+# Authorize SSH host (replace example.com with your target host)
+RUN ssh-keyscan example.com > /root/.ssh/known_hosts
 
 # Start SSH server
 CMD ["/usr/sbin/sshd", "-D"]
