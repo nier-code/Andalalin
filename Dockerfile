@@ -24,7 +24,7 @@ RUN yum install -y epel-release && \
 
 EXPOSE 4200
 
-ADD /entrypoint.sh /usr/local/sbin/
+COPY entrypoint.sh /
 
-ENTRYPOINT ["/usr/local/sbin/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["shellinabox"]
