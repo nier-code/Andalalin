@@ -16,8 +16,11 @@ RUN echo 'andalalin:andalalin' | chpasswd
 # Create the privilege separation directory
 RUN mkdir /run/sshd
 
+# Enable SSH service
+RUN systemctl enable ssh
+
 # Expose SSH port
 EXPOSE 22
 
-# Start SSH server on container startup
-CMD ["/usr/sbin/sshd", "-D"]
+# Start SSH server on container startup with debugging
+CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config"]
