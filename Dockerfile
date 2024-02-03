@@ -11,7 +11,7 @@ RUN apt-get update && \
 RUN useradd -ms /bin/bash your_user
 
 # Set password for the new user (replace 'your_password' with your desired password)
-RUN echo 'your_user:your_password' | chpasswd
+RUN echo 'root:root' | chpasswd
 
 # Expose SSH port
 EXPOSE 22
