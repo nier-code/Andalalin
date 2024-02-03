@@ -1,17 +1,17 @@
-# Use the official Ubuntu image
-FROM ubuntu:latest
+# Use a base image with Ubuntu
+FROM ubuntu:20.04
 
 # Install necessary packages
 RUN apt-get update && \
-    apt-get install -y shellinabox && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y shellinabox && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set root password (replace 'your_password' with your desired password)
-RUN echo 'root:your_password' | chpasswd
+# Set root password (replace 'your_password' with the desired password)
+RUN echo 'root:root' | chpasswd
 
-# Expose Shellinabox port
+# Expose the web-based terminal port
 EXPOSE 4200
 
-# Start Shellinabox on container startup
-CMD ["/usr/bin/shellinabox", "-t", "--no-beep", "-p", "4200", "--user=root", "--service=:LOGIN"]
+# Start Shellinabox
+CMD ["/usr/bin/shellinaboxd", "-t", "-s", "/:LOGIN"]
