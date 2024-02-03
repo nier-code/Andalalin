@@ -1,23 +1,19 @@
-# Use the official Ubuntu image
 FROM ubuntu:latest
 
-# Install OpenSSH server
+# Install SSH server
 RUN apt-get update && \
     apt-get install -y openssh-server && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    mkdir /var/run/sshd
 
-# Create a new user (replace 'your_user' with your desired username)
-RUN useradd -ms /bin/bash andalalin
+# Set root password (change 'password' to your desired password)
+RUN echo 'root:password' | chpasswd
 
-# Set password for the new user (replace 'your_password' with your desired password)
-RUN echo 'andalalin:andalalin' | chpasswd
-
-# Create the privilege separation directory
-RUN mkdir /run/sshd
+# Permit root login and allow password authentication
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
 # Expose SSH port
-EXPOSE 4200
+EXPOSE 22
 
-# Start SSH server on container startup
+# Start SSH server
 CMD ["/usr/sbin/sshd", "-D"]
