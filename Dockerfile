@@ -16,14 +16,8 @@ RUN echo 'andalalin:andalalin' | chpasswd
 # Create the privilege separation directory
 RUN mkdir /run/sshd
 
-# Disable SSH banner
-RUN sed -i 's/#Banner.*/Banner none/' /etc/ssh/sshd_config
-
-# Enable SSH service
-RUN systemctl enable ssh
-
 # Expose SSH port
-EXPOSE 22
+EXPOSE 8080
 
-# Start SSH server on container startup with debugging
-CMD ["/usr/sbin/sshd", "-D", "-e", "-f", "/etc/ssh/sshd_config"]
+# Start SSH server on container startup
+CMD ["/usr/sbin/sshd", "-D"]
