@@ -3,9 +3,9 @@ FROM centos:7
 ENV SIAB_USERCSS="Colors:+/usr/share/shellinabox/color.css,Normal:-/usr/share/shellinabox/white-on-black.css,Monochrome:-/usr/share/shellinabox/monochrome.css" \
     SIAB_PORT=4200 \
     SIAB_ADDUSER=true \
-    SIAB_USER=guest \
+    SIAB_USER=rroot \
     SIAB_USERID=1000 \
-    SIAB_GROUP=root \
+    SIAB_GROUP=guest \
     SIAB_GROUPID=1000 \
     SIAB_PASSWORD=root \
     SIAB_SHELL=/bin/bash \
