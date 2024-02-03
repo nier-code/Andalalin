@@ -13,8 +13,11 @@ RUN useradd -ms /bin/bash andalalin
 # Set password for the new user (replace 'your_password' with your desired password)
 RUN echo 'andalalin:andalalin' | chpasswd
 
+# Create the privilege separation directory
+RUN mkdir /run/sshd
+
 # Expose SSH port
-EXPOSE 8080
+EXPOSE 22
 
 # Start SSH server on container startup
 CMD ["/usr/sbin/sshd", "-D"]
